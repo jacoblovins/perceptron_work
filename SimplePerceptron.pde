@@ -3,7 +3,7 @@ Perceptron brain;
 Point[] points = new Point[100];
 
 void setup() {
-  size(400, 400);
+  size(800, 800);
   brain = new Perceptron();
 
   for(int i = 0; i < points.length; i++) {
@@ -26,17 +26,25 @@ void draw() {
   for(Point pt : points) {
     float[] inputs = {pt.x, pt.y};
     int target = pt.label;
-    brain.train(inputs, pt.label);
+    //brain.train(inputs, pt.label);
 
     int guess = brain.guess(inputs);
     if(guess == target) {
       fill(0, 255, 0);
     } else {
-      fill(255, 0, 0)
+      fill(255, 0, 0);
     }
       noStroke();
-      ellipse(pt.x, pt.y, 4, 4);
-    }
+      ellipse(pt.x, pt.y, 16, 16);
+    
   }
   
+}
+
+void mousePressed() {
+  for(Point pt : points) {
+    float[] inputs = {pt.x, pt.y};
+    int target = pt.label;
+    brain.train(inputs, target);
+  }
 }
